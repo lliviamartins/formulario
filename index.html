@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Email e Senha</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0,0,0,0.2);
+            max-width: 400px;
+            width: 100%;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .resultado {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Gerador de Email e Senha</h1>
+        <form id="formulario">
+            <input type="text" id="nome" placeholder="Digite seu nome" required>
+            <input type="text" id="sobrenome" placeholder="Digite seu sobrenome" required>
+            <input type="number" id="dia" placeholder="Dia de nascimento" min="1" max="31" required>
+            <input type="text" id="mes" placeholder="Mês de nascimento" required>
+            <input type="number" id="ano" placeholder="Ano de nascimento" min="1900" max="2100" required>
+            <input type="text" id="universidade" placeholder="Nome da universidade" required>
+            <button type="submit">Gerar Email e Senha</button>
+        </form>
+
+        <div class="resultado" id="resultado">
+            <p><strong>Email:</strong> <span id="email"></span></p>
+            <p><strong>Senha:</strong> <span id="senha"></span></p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('formulario').addEventListener('submit', function(e) {
+            e.preventDefault(); // Evita envio do formulário
+
+            // Coletando dados
+            const nome = document.getElementById('nome').value.trim();
+            const sobrenome = document.getElementById('sobrenome').value.trim();
+            const dia = document.getElementById('dia').value;
+            const mes = document.getElementById('mes').value.trim();
+            const ano = document.getElementById('ano').value;
+            const universidade = document.getElementById('universidade').value.trim();
+
+            // Gerando email
+            const email = nome.toLowerCase() + '.' + sobrenome.toLowerCase() + '@' + universidade.toUpperCase() + '.br';
+
+            // Contando vogais
+            const forms = email;
+            const letraA = (forms.match(/a/g) || []).length;
+            const letraE = (forms.match(/e/g) || []).length;
+            const letraI = (forms.match(/i/g) || []).length;
+            const letraO = (forms.match(/o/g) || []).length;
+            const letraU = (forms.match(/u/g) || []).length;
+
+            // Gerando senha
+            const senha = 'u' + letraA + 'i' + letraE + 'v' + letraI + 'e' + letraO + 'r' + letraU;
+
+            // Mostrando resultado
+            document.getElementById('email').innerText = email;
+            document.getElementById('senha').innerText = senha;
+            document.getElementById('resultado').style.display = 'block';
+        });
+    </script>
+</body>
+</html>
